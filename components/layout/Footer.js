@@ -8,11 +8,11 @@ const Footer = () => {
         Shuno Backend
       </Link>
 
-      <Link href={'https://github.com/jhm69/Shuno-Backend'} target={'_blank'}>
+      <Link href={'https://github.com/JHM69/Shuno-Client'} target={'_blank'}>
         Shuno App
       </Link>
 
-      <Link href={'https://github.com/jhm69/Shuno-Backend'} target={'_blank'}>
+      <Link href={'https://github.com/jhm69/Shuno-CMS'} target={'_blank'}>
         Shuno CMS
       </Link>
     </footer>
