@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
+    "axios": "^1.6.2",
     "clsx": "^1.2.1",
     "next": "latest",
     "react": "^18.2.0",

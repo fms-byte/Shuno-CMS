@@ -10,7 +10,7 @@ import FormSection from './Section'
 import MediaUpload from './MediaUpload'
 import ThumbnailUpload from './ThumbnailUpload'
 
-const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
+const AlbumForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
   const {
     register,
     handleSubmit,
@@ -38,17 +38,17 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
   return (
     <div {...props} className="flex flex-col space-y-6">
       <form>
-        <FormSection defaultOpen={true} title={'Song Information'}>
+        <FormSection defaultOpen={true} title={'Album Information'}>
           <Input
             name="name"
-            label="Name of the Song"
-            placeholder="My beautiful song..."
+            label="Name of the Album"
+            placeholder="My beautiful album..."
             type="text"
             error={errors.name ? errors.name.message : false}
             register={register('name', {
               required: {
                 value: true,
-                message: 'You must add the name of your song.',
+                message: 'You must add the name of your album.',
               },
             })}
           />
@@ -67,7 +67,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
             register={register('album', {
               required: {
                 value: true,
-                message: 'You must add the name of your song.',
+                message: 'You must add the name of your album.',
               },
             })}
           >
@@ -80,28 +80,28 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="year"
             label="Publish Year (optional)"
-            placeholder="Publish year of the song..."
+            placeholder="Publish year of the album..."
             type="text"
             error={errors.year ? errors.year.message : false}
             register={register('year')}
           />
           <Input
             name="duration"
-            label="Duration of the song"
-            placeholder="Duration of the song..."
+            label="Duration of the album"
+            placeholder="Duration of the album..."
             type="number"
             error={errors.duration ? errors.duration.message : false}
             register={register('duration', {
               required: {
                 value: true,
-                message: 'You must add the duartion of your song.',
+                message: 'You must add the duartion of your album.',
               },
             })}
           />
           <Input
             name="label"
             label="Label (optional)"
-            placeholder="Enter label of the song..."
+            placeholder="Enter label of the album..."
             type="text"
             error={errors.label ? errors.label.message : false}
             register={register('label')}
@@ -195,7 +195,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
             register={register('language', {
               required: {
                 value: true,
-                message: 'You must add the name of your song.',
+                message: 'You must add the name of your album.',
               },
             })}
           >
@@ -214,14 +214,14 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
 
           <Input
             name="url"
-            label="URL of the song"
+            label="URL of the album"
             placeholder="Example: https://www.youtube.com/watch?v=..."
             type="text"
             error={errors.url ? errors.url.message : false}
             register={register('url', {
               required: {
                 value: true,
-                message: 'You must add the URL of your song.',
+                message: 'You must add the URL of your album.',
               },
             })}
           />
@@ -229,7 +229,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="copyright"
             label="Copy Right (optional)"
-            placeholder="Enter copy right of the song..."
+            placeholder="Enter copy right of the album..."
             type="text"
             error={errors.copyright ? errors.copyright.message : false}
             register={register('copyright')}
@@ -242,19 +242,20 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
             register={register('contentType', {
               required: {
                 value: true,
-                message: 'You must select content type of the song.',
+                message: 'You must select content type of the album.',
               },
             })}
           >
-            <option value="MUSIC">MUSIC</option>
-            <option value="AUDIOBOOK">AUDIOBOOK</option>
-            <option value="PODCAST">PODCAST</option>
-            <option value="POEM">POEM</option>
+            <option value="">Select Type</option>
+            <option value="music">Music</option>
+            <option value="podcast">Podcast</option>
+            <option value="audiobook">Audiobook</option>
+            <option value="thesis-paper">Thesis Paper</option>
           </Select>
 
           <Input
             name="downloadUrls"
-            label="Download URL of the song (optional)"
+            label="Download URL of the album (optional)"
             placeholder="Use comma to separate multiple URLs..."
             type="text"
             error={errors.downloadUrls ? errors.downloadUrls.message : false}
@@ -264,13 +265,13 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="origin"
             label="Origin"
-            placeholder="Origin of the song..."
+            placeholder="Origin of the album..."
             type="text"
             error={errors.origin ? errors.origin.message : false}
             register={register('origin', {
               required: {
                 value: true,
-                message: 'You must add the origin of your song.',
+                message: 'You must add the origin of your album.',
               },
             })}
           />
@@ -278,7 +279,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="lyricsSnippet"
             label="Lyrics Snippet"
-            placeholder="Lyrics snippet of the song..."
+            placeholder="Lyrics snippet of the album..."
             type="text"
             error={errors.lyricsSnippet ? errors.lyricsSnippet.message : false}
             register={register('lyricsSnippet')}
@@ -287,7 +288,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="encryptedMediaUrl"
             label="Encrypted Media URL"
-            placeholder="Encrypted media URL of the song..."
+            placeholder="Encrypted media URL of the album..."
             type="text"
             error={
               errors.encryptedMediaUrl
@@ -300,7 +301,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="encryptedMediaPath"
             label="Encrypted Media Path"
-            placeholder="Encrypted media path of the song..."
+            placeholder="Encrypted media path of the album..."
             type="text"
             error={
               errors.encryptedMediaPath
@@ -313,7 +314,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="mediaPreviewUrl"
             label="Media Preview URL"
-            placeholder="Media preview URL of the song..."
+            placeholder="Media preview URL of the album..."
             type="text"
             error={
               errors.mediaPreviewUrl ? errors.mediaPreviewUrl.message : false
@@ -324,7 +325,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="permaUrl"
             label="Perma URL"
-            placeholder="Perma URL of the song..."
+            placeholder="Perma URL of the album..."
             type="text"
             error={errors.permaUrl ? errors.permaUrl.message : false}
             register={register('permaUrl')}
@@ -333,7 +334,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
           <Input
             name="albumUrl"
             label="Album URL"
-            placeholder="Album URL of the song..."
+            placeholder="Album URL of the album..."
             type="text"
             error={errors.albumUrl ? errors.albumUrl.message : false}
             register={register('albumUrl')}
@@ -358,86 +359,96 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
             />
           </div>
 
-        
+          {/* Not Added These types:
+              disabled           String
+              disabledText       String
+              cacheState         String
+              vcode              String
+              trillerAvailable   Boolean */}
 
           <Input
             name="labelUrl"
             label="Label Url (optional)"
-            placeholder="Label URL of the song..."
+            placeholder="Label URL of the album..."
             type="text"
             error={errors.labelUrl ? errors.labelUrl.message : false}
             register={register('labelUrl')}
           />
 
-<MultipleSelect
+          <Select
             name="genres"
-            label="Select Genre of the artist..."
+            label="Select Genre of the album..."
             error={errors.genres ? errors.genres.message : false}
             register={register('genres', {
               required: {
                 value: true,
-                message: 'You must select genre of the artist.',
+                message: 'You must select genre of the album.',
               },
             })}
           >
-              <option value="pop">Pop</option>
-              <option value="rock">Rock</option>
-              <option value="hiphop">Hip Hop</option>
-              <option value="rnb">RnB</option>
-              <option value="jazz">Jazz</option>
-              <option value="country">Country</option>
-              <option value="classical">Classical</option>
-              <option value="metal">Metal</option>
-              <option value="blues">Blues</option>
-              <option value="folk">Folk</option>
-              <option value="reggae">Reggae</option>
-              <option value="punk">Punk</option>
-              <option value="electronic">Electronic</option>
-              <option value="dance">Dance</option>
-              <option value="house">House</option>
-              <option value="trance">Trance</option>
-              <option value="techno">Techno</option>
-              <option value="dubstep">Dubstep</option>
-              <option value="drumnbass">Drum Bass</option>
-              <option value="ambient">Ambient</option>
-              <option value="chill">Chill</option>
-              <option value="lounge">Lounge</option>
-              <option value="trap">Trap</option>
-              <option value="indie">Indie</option>
-              <option value="alternative">Alternative</option>
-              <option value="grunge">Grunge</option>
-              <option value="psychedelic">Psychedelic</option>
-              <option value="experimental">Experimental</option>
-              <option value="funk">Funk</option>
-              <option value="soul">Soul</option>
-              <option value="disco">Disco</option>
-              <option value="gospel">Gospel</option>
-              <option value="christian">Christian</option>
-              <option value="instrumental">Instrumental</option>
-              <option value="soundtrack">Soundtrack</option>
-              <option value="kpop">Kpop</option>
-              <option value="jpop">Jpop</option>
-              <option value="anime">Anime</option>
-              <option value="game">Game</option>
-              <option value="other">Other</option>
-              <option value="adhunik-bangla">Adhunik</option>
-              <option value="rabindra-sangeet">Rabindra</option>
-              <option value="nazrul-geeti">Nazrul Geeti</option>
-              <option value="bangla-folk">Bangla Folk</option>
-              <option value="bangla-rock">Bangla Rock</option>
-              <option value="bangla-pop">Bangla Pop</option>
-              <option value="bangla-hip-hop">Bangla HipHop</option>
-              <option value="bangla-classical">Bangla Classical</option>
-              <option value="bangla-baul">Bangla Baul</option>
-              <option value="bangla-bhawaiya">Bangla Bhawaiya</option>
-              <option value="bangla-jari">Bangla Jari</option>
-              <option value="bangla-sari">Bangla Sari</option>
-              <option value="bangla-lalon">Bangla Lalon</option>
-              <option value="bangla-adhunik">Bangla Adhunik</option>
-              <option value="bangla-modern">Bangla Modern</option>
-              <option value="bangla-fusion">Bangla Fusion</option>
-              <option value="bangla-band">Bangla Band</option>
-          </MultipleSelect>
+            <option value="">Select Type</option>
+            <option value="pop">Pop</option>
+            <option value="rock">Rock</option>
+            <option value="jazz">Jazz</option>
+            <option value="blues">Blues</option>
+            <option value="country">Country</option>
+            <option value="hip-hop">Hip Hop</option>
+            <option value="rap">Rap</option>
+            <option value="rnb">R&B (Rhythm and Blues)</option>
+            <option value="electronic">Electronic</option>
+            <option value="dance">Dance</option>
+            <option value="reggae">Reggae</option>
+            <option value="folk">Folk</option>
+            <option value="classical">Classical</option>
+            <option value="indie">Indie</option>
+            <option value="alternative">Alternative</option>
+            <option value="metal">Metal</option>
+            <option value="punk">Punk</option>
+            <option value="soul">Soul</option>
+            <option value="funk">Funk</option>
+            <option value="gospel">Gospel</option>
+            <option value="techno">Techno</option>
+            <option value="house">House</option>
+            <option value="edm">EDM (Electronic Dance Music)</option>
+            <option value="dubstep">Dubstep</option>
+            <option value="country-rock">Country Rock</option>
+            <option value="hard-rock">Hard Rock</option>
+            <option value="soft-rock">Soft Rock</option>
+            <option value="acoustic">Acoustic</option>
+            <option value="latin">Latin</option>
+            <option value="ska">Ska</option>
+            <option value="bluegrass">Bluegrass</option>
+            <option value="world-music">World Music</option>
+            <option value="ambient">Ambient</option>
+            <option value="chillout">Chillout</option>
+            <option value="trap">Trap</option>
+            <option value="grime">Grime</option>
+            <option value="salsa">Salsa</option>
+            <option value="j-pop">J-Pop (Japanese Pop)</option>
+            <option value="k-pop">K-Pop (Korean Pop)</option>
+            <option value="adhunik-bangla">Adhunik Bangla</option>
+            <option value="rabindra-sangeet">Rabindra Sangeet</option>
+            <option value="nazrul-geeti">Nazrul Geeti</option>
+            <option value="bangla-folk">Bangla Folk</option>
+            <option value="bangla-rock">Bangla Rock</option>
+            <option value="bangla-pop">Bangla Pop</option>
+            <option value="bangla-hip-hop">Bangla Hip Hop</option>
+            <option value="bangla-classical">Bangla Classical</option>
+            <option value="bangla-baul">Bangla Baul</option>
+            <option value="bangla-bhawaiya">Bangla Bhawaiya</option>
+            <option value="bangla-jari">Bangla Jari</option>
+            <option value="bangla-sari">Bangla Sari</option>
+            <option value="bangla-lalon">Bangla Lalon</option>
+            <option value="bangla-adhunik">Bangla Adhunik</option>
+            <option value="bangla-modern">Bangla Modern</option>
+            <option value="bangla-fusion">Bangla Fusion</option>
+            <option value="bangla-band">Bangla Band</option>
+            <option value="bangla-adhunik-classical">
+              Bangla Adhunik Classical
+            </option>
+            <option value="bangla-instrumental">Bangla Instrumental</option>
+            <option value="bangla-movie-albums">Bangla Movie Albums</option>
+          </Select>
 
           <div className="flex flex-col items-center md:flex-row md:space-x-2">
             <Input
@@ -451,7 +462,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
               register={register('price', {
                 required: {
                   value: true,
-                  message: 'You must add the price of your song.',
+                  message: 'You must add the price of your album.',
                 },
                 setValueAs: (v) => parseFloat(v),
               })}
@@ -467,7 +478,7 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
               register={register('stock', {
                 required: {
                   value: true,
-                  message: 'You must add the price of your song.',
+                  message: 'You must add the price of your album.',
                 },
                 setValueAs: (v) => parseInt(v),
               })}
@@ -486,10 +497,10 @@ const SongForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
       </FormSection>
 
       <Button type="button" onClick={onSubmit} className="w-full">
-        {type ? `${type} Song` : 'Submit'}
+        {type ? `${type} Album` : 'Submit'}
       </Button>
     </div>
   )
 }
 
-export default SongForm
+export default AlbumForm

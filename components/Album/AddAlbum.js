@@ -3,21 +3,20 @@ import React, { Fragment, useState } from 'react'
 
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
-import SongForm from '../SongForm'
+import AlbumForm from '../AlbumForm'
 
-const UpdateSong = ({ song, ...props }) => {
+const AddAlbum = ({ props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
-
   const onFormSubmit = async (data) => {
     try {
-      await fetch(baseUrl+`/songs/updateSong`, {
-        method: 'PUT',
+      await fetch(baseUrl+`/albums/createAlbum`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: song.id, ...data }),
+        body: JSON.stringify(data),
       }).then(() => {
         handleClose()
         window.location.reload()
@@ -30,7 +29,7 @@ const UpdateSong = ({ song, ...props }) => {
   return (
     <>
       <Button onClick={handleOpen} type="button" {...props}>
-        Update
+        Add Album
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -62,15 +61,11 @@ const UpdateSong = ({ song, ...props }) => {
                     as="div"
                     className="mb-5 flex items-center justify-between text-lg font-semibold leading-6 text-gray-800"
                   >
-                    <h3>Update Song</h3>
+                    <h3>Add Album</h3>
                     <Close onClick={handleClose} />
                   </Dialog.Title>
 
-                  <SongForm
-                    defaultValues={song}
-                    onFormSubmit={onFormSubmit}
-                    type={'Update'}
-                  />
+                  <AlbumForm type={'Add'} onFormSubmit={onFormSubmit} />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -81,4 +76,4 @@ const UpdateSong = ({ song, ...props }) => {
   )
 }
 
-export default UpdateSong
+export default AddAlbum

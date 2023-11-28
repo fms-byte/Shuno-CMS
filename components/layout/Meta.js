@@ -7,14 +7,14 @@ const makeTitle = (title, name) =>
 const baseUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://jamstackhack-22.netlify.app'
+    : ''
 
 const Meta = ({
   title = 'Shuno CMS',
   name = '',
   description = 'Content management system for Shuno',
   url = baseUrl,
-  image = '/og.jpg',
+  image = '/logo.png',
   children,
 }) => (
   <Head>
