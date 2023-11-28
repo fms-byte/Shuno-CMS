@@ -1,5 +1,4 @@
 import React from 'react'
-import { getXataClient } from '../../utils/xata'
 import Layout from '../../components/layout'
 import PlaylistLayout from '../../components/Playlist/PlaylistLayout'
 import DeletePlaylist from '../../components/Playlist/DeletePlaylist'

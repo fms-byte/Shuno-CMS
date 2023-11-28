@@ -4,6 +4,7 @@ import React, { Fragment, useState } from 'react'
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
 import ArtistForm from '../ArtistForm'
+import { baseUrl } from '../../utils/constants'
 
 const UpdateArtist = ({ artist, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,15 +13,17 @@ const UpdateArtist = ({ artist, ...props }) => {
 
   const onFormSubmit = async (data) => {
     try {
-      await fetch(baseUrl+`/artists/updateArtist`, {
+      const user = JSON.parse(localStorage.getItem('user'));
+      await fetch(baseUrl+`/artists/`+artist.slug, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ id: artist.id, ...data }),
+        body: JSON.stringify({ slug: artist.slug, ...data }),
       }).then(() => {
-        handleClose()
-        window.location.reload()
+        // handleClose()
+        // window.location.reload()
       })
     } catch (error) {
       console.log(error)

@@ -17,58 +17,75 @@ const ArtistLayout = ({ artist }) => {
         <Section title={'Name'}>
           <p className="text-2xl">{artist.name}</p>
         </Section>
-        <Section title={'Description'}>
-          <p className="text-md max-w-md">{artist.description}</p>
+         
+        <Section title={'Genres'}>
+          {
+            artist.genres?.map((genre, idx) => (
+              <p className="text-md max-w-md" key={idx}>{genre}</p>
+            ))
+          }
         </Section>
-        <Section title={'Price'}>
-          <p className="text-md max-w-md">{artist.price} $</p>
-          <p className="text-xs">for one artist</p>
+        <Section title={'Info'}>
+          <p className="text-md max-w-md">Bio: {artist.bio}</p>
+          <p className="text-xs">Born Year: {artist.dob}</p>
         </Section>
-        <Section title={'In Stock'}>
-          <p className="text-md max-w-md">{artist.stock}</p>
+        <Section title={'Follower'}>
+          <p className="text-xs">{artist.followerCount}</p>
+          </Section>
+        <Section title={'Social'}>
+          <p className="text-md max-w-md"> Facebook:  {artist.fb} </p>
+          <p className="text-md max-w-md"> Twitter:  {artist.twitter} </p>
         </Section>
+        
       </div>
       <div>
         <div className="mb-2 h-6"></div>
-        <Section title={'Thumbnail'}>
-          {artist.thumbnail ? (
-            <Link href={artist.thumbnail}>
-              <a target="_blank">
-                <Image
-                  height={281}
-                  width={500}
-                  className="aspect-video max-h-[281px] max-w-[500px] rounded"
-                  src={artist.thumbnail}
-                  alt={artist.name}
-                />
-              </a>
-            </Link>
+        <Section title={'Photo'}>
+          {artist.primaryImage ? (
+             <img
+             height={281}
+             width={281}
+             className=" max-h-[281px] max-w-[281px] rounded"
+             src={artist.primaryImage}
+             alt={artist.name}
+           />
           ) : (
             <p className="h-[100px] w-[400px] text-center font-bold text-gray-300">
-              No thumbnail
+              No Image
             </p>
           )}
         </Section>
-        <Section title={'Media'}>
-          {artist.media?.length ? (
+        <Section title={'Songs'}>
+          {artist.songs?.length ? (
             <div className="grid grid-cols-1 lg:grid-cols-2">
-              {artist.media?.map((i, idx) => (
-                <Link href={i} key={idx}>
-                  <a target="_blank">
-                    <Image
-                      height={138}
-                      width={245}
-                      className="aspect-video w-full overflow-hidden rounded p-1 lg:max-h-[138px] lg:max-w-[245px]"
-                      src={i}
-                      alt={''}
-                    />
-                  </a>
-                </Link>
-              ))}
+              {
+                artist.songs?.map((song, idx) => (
+                  <div key={idx} className="mb-2">
+                    <Link href={`/song/${song.id}`}>
+                      <a className="flex items-center space-x-2">
+                        <div className="flex-shrink-0 w-10 h-10">
+                          <Image
+                            src={song.primaryImage}
+                            alt={song.name}
+                            width={40}
+                            height={40}
+                            className="rounded-md"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-md">{song.name}</p> 
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                ))
+
+              }
+           
             </div>
           ) : (
             <p className="h-[100px] w-[400px] text-center font-bold text-gray-300">
-              No media
+              No Songs
             </p>
           )}
         </Section>

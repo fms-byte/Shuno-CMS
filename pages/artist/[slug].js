@@ -1,13 +1,35 @@
-import React from 'react'
-import { getXataClient } from '../../utils/xata'
+import React, { useEffect } from 'react'
 import Layout from '../../components/layout'
 import ArtistLayout from '../../components/Artist/ArtistLayout'
 import DeleteArtist from '../../components/Artist/DeleteArtist'
 import UpdateArtist from '../../components/Artist/UpdateArtist'
+import axios from 'axios'
+import { baseUrl } from '../../utils/constants'
+import { useRouter } from 'next/router'
 
  
 
-function Artist({ artist }) {
+function Artist() {
+
+
+  const [artist, setArtist] = React.useState({})
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(null) 
+
+  const router = useRouter();
+ 
+
+  useEffect(() => {
+    console.log(router.query.slug);
+    const response = axios.get(baseUrl + `/artists/` + router.query.slug).then((res) => {
+      console.log(res.data.artist.artist)
+      setArtist(res.data.artist.artist)
+    }
+    ).catch((err) => {
+      console.log(err)
+    })
+  }, [router.query.slug])
+    
   return (
     <Layout meta={{ name: artist?.name || 'Artist' }}>
       <div>
@@ -20,12 +42,8 @@ function Artist({ artist }) {
           </h1>
           <div className="flex items-center space-x-2">
             <UpdateArtist artist={artist} />
-            <DeleteArtist
-              disabled={
-                artist?.id === 'rec_ce0bsgt8oiq6e92pa810' ||
-                artist?.id === 'rec_ce0btqp99gj1h1lgvno0'
-              }
-              artistId={artist?.id}
+            <DeleteArtist 
+              slug={artist?.slug}
             />
           </div>
         </header>
@@ -42,31 +60,4 @@ function Artist({ artist }) {
 }
 
 export default Artist
-
-export async function getStaticProps({ params }) {
-  try {
-    const artists = []
-    const data = artists
-      .filter({
-        id: params.id,
-      })
-      .getMany()
-    return {
-      props: { artist: data[0] },
-    }
-  } catch (error) {
-    return {
-      props: {},
-    }
-  }
-}
-
-export async function getStaticPaths() {
-  const artists = []
-  return {
-    paths: artists.map((item) => ({
-      params: { id: item.id },
-    })),
-    fallback: true,
-  }
-}
+ 

@@ -2,8 +2,9 @@ import Layout from '../components/layout'
 import ArtistItems from '../components/Artists/ArtistItems'
 import { useEffect, useState } from 'react'
 import ArtistItemsSkeleton from '../components/Artists/ArtistItemsSkeleton' 
-import AddArtist from '../components/Artist/AddArtist'
+import AddArtist from '../components/Artist/AddArtist' 
 import { baseUrl } from '../utils/constants'
+import axios from 'axios'
 
 function Artists() {
   const [loading, setLoading] = useState(false)
@@ -11,13 +12,13 @@ function Artists() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      try {
-        const res = await fetch(baseUrl+`/artists`)
-        const { data } = await res.json()
-        setArtists(data)
-      } catch (error) {
-        console.log(error)
-      }
+         axios.get(baseUrl+`/artists`).then((res) => {
+            console.log(res.data.artists)
+            setArtists(res.data.artists)
+            }
+            ).catch((err) => {
+              console.log(err)
+            })
       setLoading(false)
     }
 
@@ -33,16 +34,7 @@ function Artists() {
         </div>
       </header>
       <div>
-      <div className="cursor-loading mt-6 mb-3 flex rounded-md border px-5 py-3 shadow-sm lg:px-8">
-      <div className="flex-1 font-semibold text-sky-600">Name</div>
-      <div className="flex-1 text-right font-semibold text-sky-600 lg:text-left">
-        Artist
-      </div>
-      <div className="flex-1 text-right font-semibold text-sky-600 lg:text-left">
-        Album
-      </div>
-      <div className="flex-1"></div>
-    </div>
+      
     </div>
       {loading ? (
         <ArtistItemsSkeleton />

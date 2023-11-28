@@ -4,19 +4,23 @@ import React, { Fragment, useState } from 'react'
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
 import ArtistForm from '../ArtistForm'
+import { baseUrl } from '../../utils/constants'
 
 const AddArtist = ({ props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
   const onFormSubmit = async (data) => {
-    alert('hello')
+   
     console.log(data)
-    try {
+    try { 
+      const user = JSON.parse(localStorage.getItem('user'));
+      
       await fetch(baseUrl+`/artists`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
         },
         body: JSON.stringify(data),
       }).then(() => {

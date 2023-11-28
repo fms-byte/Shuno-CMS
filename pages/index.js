@@ -1,5 +1,4 @@
-import { useForm } from 'react-hook-form'
-import FormSection from '../components/ArtistForm/Section'
+import { useForm } from 'react-hook-form' 
 import Button from '../components/common/Button' 
 import Layout from '../components/layout'
 import { useState } from 'react' 
@@ -12,7 +11,6 @@ function Index() {
   const { isLoggedIn, login, logout } = useAuth();
 
   useState(() => {
-
     if (typeof window !== 'undefined') {
       const user = JSON.parse(localStorage.getItem('user'));
     if (user && user.token) {
@@ -45,16 +43,14 @@ function Index() {
         const data = await res.json()
         localStorage.setItem('user', JSON.stringify(data.user))
         login();
+        document.cookie = `Token=${data.user.token}; Secure; HttpOnly; SameSite=Strict`;
+ 
         window.location.href = '/'
       } else {
         console.log(res.json())
         alert('Wrong username or password')
       }
-      setLoading(false)
-
-
-     
-
+      setLoading(false) 
     } catch (error) {
       setLoading(false)
       console.log(error)
@@ -65,7 +61,7 @@ function Index() {
   return (
     <header className="flex h-full flex-col items-center justify-center sm:max-lg:min-h-[85vh]">
       <img src="/logo.png" alt="logo" className="w-24 mb-4" />
-      
+
       <h1 className="mb-3 text-3xl font-bold">Shuno CMS</h1>
       <p className="mb-2 text-sm text-gray-500">Manage Songs, Albums, Artist, Podcast etc</p>
 

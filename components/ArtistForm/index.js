@@ -9,7 +9,7 @@ import RadioSelect from '../common/RadioSelect'
 
 import FormSection from '../common/Section'
 
-import axios from 'axios'
+import axios from 'axios' 
 import { baseUrl } from '../../utils/constants'
 
 const ArtistForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
@@ -49,10 +49,9 @@ const ArtistForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
   
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
-    alert('hello')
+    console.log(data) 
     await onFormSubmit(data)
-    reset()
+    //reset()
   })
 
   return (
