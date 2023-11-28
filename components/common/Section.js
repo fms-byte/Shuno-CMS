@@ -1,6 +1,6 @@
 import { Disclosure } from '@headlessui/react'
 import clsx from 'clsx'
-import ChevronRight from '../common/icons/ChevronRight'
+import ChevronRight from './icons/ChevronRight'
 
 export default function FormSection({ title, children, ...props }) {
   return (

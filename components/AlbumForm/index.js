@@ -6,9 +6,10 @@ import Select from '../common/Select'
 import { MultipleSelect, OptionWithCheckbox } from '../common/MultipleSelect'
 import Checkbox from '../common/Checkbox'
 import RadioSelect from '../common/RadioSelect'
-import FormSection from './Section'
-import MediaUpload from './MediaUpload'
-import ThumbnailUpload from './ThumbnailUpload'
+
+import FormSection from '../common/Section' 
+import MediaUpload from '../common/MediaUpload'
+import ThumbnailUpload from '../common/ThumbnailUpload'
 
 const AlbumForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
   const {

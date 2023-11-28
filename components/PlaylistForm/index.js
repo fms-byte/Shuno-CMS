@@ -5,10 +5,10 @@ import Input from '../common/Input'
 import Select from '../common/Select'
 import { MultipleSelect, OptionWithCheckbox } from '../common/MultipleSelect'
 import Checkbox from '../common/Checkbox'
-import RadioSelect from '../common/RadioSelect'
-import FormSection from './Section'
-import MediaUpload from './MediaUpload'
-import ThumbnailUpload from './ThumbnailUpload'
+import RadioSelect from '../common/RadioSelect' 
+import MediaUpload from '../common/MediaUpload'
+import ThumbnailUpload from '../common/ThumbnailUpload'
+import FormSection from '../common/Section'
 
 const PlaylistForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
   const {

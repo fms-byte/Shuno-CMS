@@ -10,8 +10,10 @@ const AddArtist = ({ props }) => {
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
   const onFormSubmit = async (data) => {
+    alert('hello')
+    console.log(data)
     try {
-      await fetch(baseUrl+`/artists/createArtist`, {
+      await fetch(baseUrl+`/artists`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

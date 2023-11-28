@@ -6,9 +6,9 @@ import Select from '../common/Select'
 import { MultipleSelect, OptionWithCheckbox } from '../common/MultipleSelect'
 import Checkbox from '../common/Checkbox'
 import RadioSelect from '../common/RadioSelect'
-import FormSection from './Section'
-import MediaUpload from './MediaUpload'
-import ThumbnailUpload from './ThumbnailUpload'
+
+import FormSection from '../common/Section'
+
 import axios from 'axios'
 import { baseUrl } from '../../utils/constants'
 
@@ -31,18 +31,26 @@ const ArtistForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
     })
   
     if (defaultValues) {
-      setValue('name', defaultValues.name)
-      setValue('description', defaultValues.description)
-      setValue('price', defaultValues.price)
-      setValue('stock', defaultValues.stock)
-      setValue('thumbnail', defaultValues.thumbnail)
-      setValue('media', defaultValues.media)
+      setValue('name', defaultValues.name) 
+      setValue('primaryImage', defaultValues.primaryImage)
+      setValue('bio', defaultValues.bio)
+      setValue('creatorType', defaultValues.creatorType)
+      setValue('genres', defaultValues.genres)
+      setValue('fb', defaultValues.fb)
+      setValue('twitter', defaultValues.twitter)
+      setValue('wiki', defaultValues.wiki)
+      setValue('dob', defaultValues.dob)
+      setValue('dominantLanguage', defaultValues.dominantLanguage)
+      setValue('isBand', defaultValues.isBand)
+      setValue('bandMembers', defaultValues.bandMembers)
     }
   }, [defaultValues, setValue])
 
   
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data)
+    alert('hello')
     await onFormSubmit(data)
     reset()
   })
@@ -223,12 +231,7 @@ const ArtistForm = ({ type, defaultValues, onFormSubmit, ...props }) => {
             name="dominantLanguage"
             label="Language"
             error={errors.dominantLanguage ? errors.dominantLanguage.message : false}
-            register={register('dominantLanguage', {
-              required: {
-                value: true,
-                message: 'You must add the name of your playlist.',
-              },
-            })}
+            
           >
             <option value="">Select Language</option>
             <option value="bangla">Bangla</option>
