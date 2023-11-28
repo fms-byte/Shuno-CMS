@@ -11,7 +11,7 @@ const AddSong = ({ props }) => {
   const handleOpen = () => setIsOpen(true)
   const onFormSubmit = async (data) => {
     try {
-      await fetch(`/api/songs/createSong`, {
+      await fetch(baseUrl+`/songs/createSong`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

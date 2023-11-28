@@ -1,35 +1,35 @@
 import React from 'react'
 import Layout from '../../components/layout'
-import SongLayout from '../../components/Song/SongLayout'
-import DeleteSong from '../../components/Song/DeleteSong'
-import UpdateSong from '../../components/Song/UpdateSong'
+import AlbumLayout from '../../components/Album/AlbumLayout'
+import DeleteAlbum from '../../components/Album/DeleteAlbum'
+import UpdateAlbum from '../../components/Album/UpdateAlbum'
 
  
 
-function Song({ song }) {
+function Album({ album }) {
   return (
-    <Layout meta={{ name: song?.name || 'Song' }}>
+    <Layout meta={{ name: album?.name || 'Album' }}>
       <div>
         <header className="my-3 flex flex-col items-center justify-between rounded-md md:flex-row">
           <h1 className="mb-3 truncate text-xl font-bold text-gray-700">
             <span className="mr-2 text-sm font-medium text-gray-500">
-              Song:{' '}
+              Album:{' '}
             </span>
-            {song?.name}
+            {album?.name}
           </h1>
           <div className="flex items-center space-x-2">
-            <UpdateSong song={song} />
-            <DeleteSong
+            <UpdateAlbum album={album} />
+            <DeleteAlbum
               disabled={
-                song?.id === 'rec_ce0bsgt8oiq6e92pa810' ||
-                song?.id === 'rec_ce0btqp99gj1h1lgvno0'
+                album?.id === 'rec_ce0bsgt8oiq6e92pa810' ||
+                album?.id === 'rec_ce0btqp99gj1h1lgvno0'
               }
-              songId={song?.id}
+              albumId={album?.id}
             />
           </div>
         </header>
-        {song ? (
-          <SongLayout song={song} />
+        {album ? (
+          <AlbumLayout album={album} />
         ) : (
           <div className="w-full text-center text-2xl font-bold text-gray-300">
             No details
@@ -40,18 +40,18 @@ function Song({ song }) {
   )
 }
 
-export default Song
+export default Album
 
 export async function getStaticProps({ params }) {
   try {
-    const songs = []
-    const data = songs
+    const albums = []
+    const data = albums
       .filter({
         id: params.id,
       })
       .getMany()
     return {
-      props: { song: data[0] },
+      props: { album: data[0] },
     }
   } catch (error) {
     return {
@@ -61,9 +61,9 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const songs = []
+  const albums = []
   return {
-    paths: songs.map((item) => ({
+    paths: albums.map((item) => ({
       params: { id: item.id },
     })),
     fallback: true,

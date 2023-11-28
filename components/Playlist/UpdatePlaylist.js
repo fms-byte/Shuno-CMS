@@ -3,21 +3,21 @@ import React, { Fragment, useState } from 'react'
 
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
-import SongForm from '../SongForm'
+import PlaylistForm from '../PlaylistForm'
 
-const UpdateSong = ({ song, ...props }) => {
+const UpdatePlaylist = ({ playlist, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
 
   const onFormSubmit = async (data) => {
     try {
-      await fetch(baseUrl+`/songs/updateSong`, {
+      await fetch(baseUrl+`/playlists/updatePlaylist`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: song.id, ...data }),
+        body: JSON.stringify({ id: playlist.id, ...data }),
       }).then(() => {
         handleClose()
         window.location.reload()
@@ -62,12 +62,12 @@ const UpdateSong = ({ song, ...props }) => {
                     as="div"
                     className="mb-5 flex items-center justify-between text-lg font-semibold leading-6 text-gray-800"
                   >
-                    <h3>Update Song</h3>
+                    <h3>Update Playlist</h3>
                     <Close onClick={handleClose} />
                   </Dialog.Title>
 
-                  <SongForm
-                    defaultValues={song}
+                  <PlaylistForm
+                    defaultValues={playlist}
                     onFormSubmit={onFormSubmit}
                     type={'Update'}
                   />
@@ -81,4 +81,4 @@ const UpdateSong = ({ song, ...props }) => {
   )
 }
 
-export default UpdateSong
+export default UpdatePlaylist

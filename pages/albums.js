@@ -1,19 +1,20 @@
 import Layout from '../components/layout'
-import SongItems from '../components/Songs/SongItems'
+import AlbumItems from '../components/Albums/AlbumItems'
 import { useEffect, useState } from 'react'
-import SongItemsSkeleton from '../components/Songs/SongItemsSkeleton' 
-import AddSong from '../components/Song/AddSong'
+import AlbumItemsSkeleton from '../components/Albums/AlbumItemsSkeleton' 
+import AddAlbum from '../components/Album/AddAlbum'
+import { baseUrl } from '../utils/constants'
 
-function Songs() {
+function Albums() {
   const [loading, setLoading] = useState(false)
-  const [songs, setSongs] = useState([])
+  const [albums, setAlbums] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const res = await fetch(baseUrl+`/songs`)
+        const res = await fetch(baseUrl+`/albums`)
         const { data } = await res.json()
-        setSongs(data)
+        setAlbums(data)
       } catch (error) {
         console.log(error)
       }
@@ -26,16 +27,16 @@ function Songs() {
   return (
     <div>
       <header className="mt-3 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-700">Songs</h1>
+        <h1 className="text-2xl font-bold text-gray-700">Albums</h1>
         <div className="flex items-center space-x-2">
-          <AddSong />
+          <AddAlbum />
         </div>
       </header>
       <div>
       <div className="cursor-loading mt-6 mb-3 flex rounded-md border px-5 py-3 shadow-sm lg:px-8">
       <div className="flex-1 font-semibold text-sky-600">Name</div>
       <div className="flex-1 text-right font-semibold text-sky-600 lg:text-left">
-        Artist
+        Album
       </div>
       <div className="flex-1 text-right font-semibold text-sky-600 lg:text-left">
         Album
@@ -44,16 +45,16 @@ function Songs() {
     </div>
     </div>
       {loading ? (
-        <SongItemsSkeleton />
+        <AlbumItemsSkeleton />
       ) : (
-        <SongItems songs={songs} />
+        <AlbumItems albums={albums} />
       )}
     </div>
   )
 }
 
-export default Songs
+export default Albums
 
-Songs.getLayout = function getLayout(page) {
-  return <Layout meta={{ name: 'Songs' }}>{page}</Layout>
+Albums.getLayout = function getLayout(page) {
+  return <Layout meta={{ name: 'Albums' }}>{page}</Layout>
 }

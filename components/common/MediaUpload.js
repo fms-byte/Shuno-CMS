@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Button from '../common/Button'
+import Button from './Button'
 
 const MediaUpload = ({ defaultValues = [], setValue }) => {
   const [imageSrc, setImageSrc] = useState([...defaultValues])

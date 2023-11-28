@@ -2,25 +2,23 @@ import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
 
 import Button from '../common/Button'
-import { Close } from '../common/icons/Close'
-import SongForm from '../SongForm'
 
-const UpdateSong = ({ song, ...props }) => {
+const DeleteAlbum = ({ albumId, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
 
-  const onFormSubmit = async (data) => {
+  const handleDelete = async () => {
     try {
-      await fetch(baseUrl+`/songs/updateSong`, {
-        method: 'PUT',
+      await fetch(baseUrl+`/albums/deleteAlbum`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: song.id, ...data }),
+        body: JSON.stringify({ id: albumId }),
       }).then(() => {
         handleClose()
-        window.location.reload()
+        window.location.replace('/albums')
       })
     } catch (error) {
       console.log(error)
@@ -29,8 +27,8 @@ const UpdateSong = ({ song, ...props }) => {
 
   return (
     <>
-      <Button onClick={handleOpen} type="button" {...props}>
-        Update
+      <Button onClick={handleOpen} variant="text" type="button" {...props}>
+        Delete
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -57,20 +55,31 @@ const UpdateSong = ({ song, ...props }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-xl transform overflow-y-auto rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
-                    as="div"
-                    className="mb-5 flex items-center justify-between text-lg font-semibold leading-6 text-gray-800"
+                    as="h3"
+                    className="mb-5 text-lg font-semibold leading-6 text-gray-800"
                   >
-                    <h3>Update Song</h3>
-                    <Close onClick={handleClose} />
+                    Delete Album
                   </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Do you really want to delete the album?
+                    </p>
+                  </div>
 
-                  <SongForm
-                    defaultValues={song}
-                    onFormSubmit={onFormSubmit}
-                    type={'Update'}
-                  />
+                  <div className="mt-4 flex w-full items-center space-x-4">
+                    <Button
+                      className="flex-1"
+                      variant="text"
+                      onClick={handleClose}
+                    >
+                      Cancel
+                    </Button>
+                    <Button className="flex-1" onClick={handleDelete}>
+                      Delete
+                    </Button>
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -81,4 +90,4 @@ const UpdateSong = ({ song, ...props }) => {
   )
 }
 
-export default UpdateSong
+export default DeleteAlbum

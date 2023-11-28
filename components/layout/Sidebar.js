@@ -27,6 +27,9 @@ const Sidebar = () => {
         >
           <NavLink href={'/'}>Home</NavLink>
           <NavLink href={'/songs'}>Songs</NavLink>
+          <NavLink href={'/artists'}>Artist</NavLink>
+          <NavLink href={'/albums'}>Album</NavLink>
+          <NavLink href={'/playlists'}>Playlists</NavLink>
         </nav>
       </div>
     </>

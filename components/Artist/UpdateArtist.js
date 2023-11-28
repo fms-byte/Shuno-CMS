@@ -3,24 +3,27 @@ import React, { Fragment, useState } from 'react'
 
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
-import SongForm from '../SongForm'
+import ArtistForm from '../ArtistForm'
+import { baseUrl } from '../../utils/constants'
 
-const UpdateSong = ({ song, ...props }) => {
+const UpdateArtist = ({ artist, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
 
   const onFormSubmit = async (data) => {
     try {
-      await fetch(baseUrl+`/songs/updateSong`, {
+      const user = JSON.parse(localStorage.getItem('user'));
+      await fetch(baseUrl+`/artists/`+artist.slug, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ id: song.id, ...data }),
+        body: JSON.stringify({ slug: artist.slug, ...data }),
       }).then(() => {
-        handleClose()
-        window.location.reload()
+        // handleClose()
+        // window.location.reload()
       })
     } catch (error) {
       console.log(error)
@@ -62,12 +65,12 @@ const UpdateSong = ({ song, ...props }) => {
                     as="div"
                     className="mb-5 flex items-center justify-between text-lg font-semibold leading-6 text-gray-800"
                   >
-                    <h3>Update Song</h3>
+                    <h3>Update Artist</h3>
                     <Close onClick={handleClose} />
                   </Dialog.Title>
 
-                  <SongForm
-                    defaultValues={song}
+                  <ArtistForm
+                    defaultValues={artist}
                     onFormSubmit={onFormSubmit}
                     type={'Update'}
                   />
@@ -81,4 +84,4 @@ const UpdateSong = ({ song, ...props }) => {
   )
 }
 
-export default UpdateSong
+export default UpdateArtist
